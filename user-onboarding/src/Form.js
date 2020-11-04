@@ -1,7 +1,7 @@
 import React from "react"
 
 
-export default function Form(){
+export default function Form(props){
     const { values, submit, change, disabled, errors } = props;
 
     const onSubmit = (evt) => {
@@ -20,21 +20,28 @@ export default function Form(){
         <form className= "form container" onSubmit ={onSubmit}>
         <label htmlFor="nameImport">
         Name
-        <input id="nameImport" type="text" name="name" placeholder="Name" />
+        <input value={values.name} type="text" name="name" placeholder="Name" onChange={onChange} />
       </label>
       <label htmlFor="email">
         Email
-        <input id="emailImport" type="email" name="email" placeholder="Email Address" />
+        <input value={values.email} type="email" name="email" placeholder="Email Address" onChange={onChange} />
       </label>
       <label htmlFor="passwordInput">
         Password
-        <input id="passwordInput" type="password" name="password" placeholder="Password" />
+        <input value={values.password} type="password" name="password" placeholder="Password" onChange={onChange} />
       </label>
       <label htmlFor="termsInput">
         Do you agree to the terms and conditions?
-        <input id="termsInput" type="checkbox" name="terms" value= "false" />
+        <input onChange={onChange} type="checkbox" name="terms" value={values.terms} />
       </label>
-      <button>Submit!</button>
+      <button disabled = {disabled}>Submit!</button>
+      <div className ="errors">
+          <div>
+              <h1>{errors.name}</h1></div>
+          <div><h1>{errors.email}</h1></div>
+          <div><h1>{errors.password}</h1></div>
+          <div><h1>{errors.terms}</h1></div>
+      </div>
     </form>
     </div>
     )
