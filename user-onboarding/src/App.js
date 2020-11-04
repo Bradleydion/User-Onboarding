@@ -19,7 +19,7 @@ const intialFormErros ={
   name:"",
   email:"",
   password:"",
-  Terms: false,
+  Terms: true,
 }
 const initialUsers = [];
 const initialDisabled = true;
@@ -47,7 +47,13 @@ function App() {
         .then(()=> {
           setFormErrors({
             ...formErrors,
-            [name]: err.errors[0]
+            [name]:"",
+          })
+          .catch((err)=>{
+            setFormErrors({
+              ...formErrors,
+              [name]:err.errors[0],
+            })
           })
         })
         setFormValues({
@@ -64,11 +70,12 @@ const newUser ={
 postNewUser(newUser)
   }
 
-  useEffect (()=>{
-    schema.isValid(formValues).then((valid)=>{
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => {
       setDisabled(!valid);
-    })
-  }[formValues]);
+    });
+  }, [formValues]);
+
   return (
     <div className="App">
       
