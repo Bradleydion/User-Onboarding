@@ -4,6 +4,7 @@ import React, {useState, useEffect} from "react"
 import * as yup from "yup"
 import schema from "./formSchema"
 import axios from "axios"
+import Users from "./Users"
 
 
 // Set your intial states of endpoints
@@ -47,7 +48,13 @@ function App() {
         .then(()=> {
           setFormErrors({
             ...formErrors,
-            [name]: err.errors[0]
+            [name]:"",
+          })
+        })
+        .catch((err)=>{
+          setFormErrors({
+            ...formErrors,
+            [name]:err.errors[0],
           })
         })
         setFormValues({
@@ -64,11 +71,12 @@ const newUser ={
 postNewUser(newUser)
   }
 
-  useEffect (()=>{
-    schema.isValid(formValues).then((valid)=>{
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => {
       setDisabled(!valid);
-    })
-  }[formValues]);
+    });
+  }, [formValues]);
+
   return (
     <div className="App">
       
@@ -79,7 +87,9 @@ postNewUser(newUser)
        disabled ={disabled}
        errors ={formErrors}
        />
-     
+     {user.map((users) => {
+        return <Users key={users.id} details={users} />;})
+      }
     </div>
   );
 }
