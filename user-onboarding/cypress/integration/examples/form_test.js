@@ -10,6 +10,7 @@ describe('Form test', ()=>{
     const emailInput = () => cy.get('input[name = email]');
     const passwordInput = () => cy.get('input[name = password]');
     const checkboxInput = () => cy.get('[type = checkbox]')
+    const submitButton= ()=> cy.get (`button[id="submitButton"]`)
 
     describe ('Testing Name Input',()=>{
         it('should fill in the name input',()=>{
@@ -37,6 +38,25 @@ describe('Form test', ()=>{
         it('should test if the checkbox checks or unchecks', ()=>{
             checkboxInput().check()
             checkboxInput().uncheck()
+        })
+    })
+    describe('testing to see if we can submit a filled out form', ()=>{
+        it('should fill out and submit the form',()=>{
+            nameInput().type('This is my first and last name')
+            emailInput().type('myemailis@somehere.com')
+            passwordInput().type('********')
+            checkboxInput().check()
+            submitButton().click()
+        })
+    })
+    describe('this test should fail, we will try to submit with out adding all of the feilds',()=>{
+        it('should fail, and leave a field blank',()=>{
+            nameInput().type('This is my first and last name')
+            emailInput().type('myemailis@somehere.com')
+            passwordInput().type('********')
+            checkboxInput().check()
+            checkboxInput().uncheck()
+            submitButton().click()
         })
     })
 })
