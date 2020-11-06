@@ -24,7 +24,7 @@ export default function Form(props){
       </label>
       <label htmlFor="email">
         Email
-        <input value={values.email} type="email" name="email" placeholder="Email Address" onChange={onChange} />
+        <input value={values.email} id="email" type="email" name="email" placeholder="Email Address" onChange={onChange} />
       </label>
       <label htmlFor="passwordInput">
         Password
