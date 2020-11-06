@@ -9,7 +9,8 @@ describe('Form test', ()=>{
     const nameInput = ()=> cy.get('input[name = name');
     const emailInput = () => cy.get('input[name = email]');
     const passwordInput = () => cy.get('input[name = password]');
-    
+    const checkboxInput = () => cy.get('[type = checkbox]')
+
     describe ('Testing Name Input',()=>{
         it('should fill in the name input',()=>{
             nameInput().should('have.value','')
@@ -30,6 +31,12 @@ describe('Form test', ()=>{
             passwordInput().should('have.value',"")
             .type('*******')
             .should('have.value','*******')
+        })
+    })
+    describe('testing the terms agreement checkbox',()=>{
+        it('should test if the checkbox checks or unchecks', ()=>{
+            checkboxInput().check()
+            checkboxInput().uncheck()
         })
     })
 })
